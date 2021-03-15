@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "categoria")
@@ -13,7 +14,8 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
+	@NotNull
 	private String nome;
 
 	public void setCodigo(Long codigo) {
@@ -27,11 +29,11 @@ public class Categoria {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public Long getCodigo() {
 		return codigo;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,6 +58,5 @@ public class Categoria {
 			return false;
 		return true;
 	}
-	
-	
+
 }
