@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "categoria")
@@ -16,6 +17,7 @@ public class Categoria {
 	private Long codigo;
 
 	@NotNull
+	@Size(min=3, max=50)
 	private String nome;
 
 	public void setCodigo(Long codigo) {
