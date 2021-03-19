@@ -50,9 +50,11 @@ public class PessoaResource {
 	}
 
 	@GetMapping("/{codigo}")
-	public Optional<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
+	public ResponseEntity<Object> buscarPeloCodigo(@PathVariable Long codigo) {
 
-		return pessoaRepository.findById(codigo);
+		Optional<Pessoa> pessoa = this.pessoaRepository.findById(codigo);
+
+		return pessoa.isPresent() ? ResponseEntity.ok(pessoa.get()) : ResponseEntity.notFound().build();
 	}
 
 	@DeleteMapping("/{codigo}")
