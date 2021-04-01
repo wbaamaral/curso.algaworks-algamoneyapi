@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
