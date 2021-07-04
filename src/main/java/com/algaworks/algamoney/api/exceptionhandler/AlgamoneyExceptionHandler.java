@@ -33,7 +33,7 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 
 		String mensagemUsuario = this.messageSource.getMessage("mensagem.invalida", null,
 				LocaleContextHolder.getLocale());
-		
+
 		String mensagemDesenvolvedor = Optional.ofNullable(ex.getCause()).orElse(ex).toString();
 
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
