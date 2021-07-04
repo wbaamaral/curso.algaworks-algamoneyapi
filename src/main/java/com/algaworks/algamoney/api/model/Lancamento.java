@@ -31,6 +31,8 @@ public class Lancamento {
 	@EqualsAndHashCode.Include
 	private Long codigo;
 
+	private String descricao;
+
 	@Column(name = "data_vencimento")
 	private LocalDate dataVencimento;
 
