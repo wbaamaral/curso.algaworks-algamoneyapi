@@ -30,7 +30,6 @@ public class Lancamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	@NotNull
 	private Long codigo;
 
 	@NotNull
