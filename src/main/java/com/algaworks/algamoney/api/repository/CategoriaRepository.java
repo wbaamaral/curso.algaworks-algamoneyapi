@@ -6,5 +6,5 @@ import com.algaworks.algamoney.api.model.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 
-	
+
 }

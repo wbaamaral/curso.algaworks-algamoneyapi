@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Embeddable
 public class Endereco {
-	
+
 	private String logradouro;
  	private String numero;
 	private String bairro;
@@ -17,6 +17,6 @@ public class Endereco {
 	private String cidade;
 	private String estado;
 	private String complemento;
-	
-	
+
+
 }

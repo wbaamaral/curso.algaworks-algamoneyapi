@@ -25,6 +25,7 @@ import com.algaworks.algamoney.api.event.RecursoCriadoEvent;
 import com.algaworks.algamoney.api.exceptionhandler.AlgamoneyExceptionHandler.Erro;
 import com.algaworks.algamoney.api.model.Lancamento;
 import com.algaworks.algamoney.api.repository.LancamentoRepository;
+import com.algaworks.algamoney.api.repository.filter.LancamentoFilter;
 import com.algaworks.algamoney.api.service.LancamentoService;
 import com.algaworks.algamoney.api.service.exception.PessoaInexistenteOuInativaException;
 
@@ -45,9 +46,9 @@ public class LancamentoResource {
 	private LancamentoService lancamentoService;
 
 	@GetMapping
-	public List<Lancamento> listar() {
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
 
-		return lancamentoRepository.findAll();
+		return lancamentoRepository.filtrar(lancamentoFilter);
 	}
 
 	@GetMapping("/{codigo}")
@@ -67,18 +68,13 @@ public class LancamentoResource {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
 	}
-	
-	
+
 	/*
-	 * Opção de tratamento de erros sem try catch
-	 * Tratando direto no controlador o código fica mais limpo :) 
-	 * ---com exceção do comentario do aprendiz aqui.
-	 * 
-	 *   try {
-	 *   } catch (Exception e) {
-	 *   	// TODO: handle exception
-	 *   }
-	 *      
+	 * Opção de tratamento de erros sem try catch Tratando direto no controlador o
+	 * código fica mais limpo :) ---com exceção do comentario do aprendiz aqui.
+	 *
+	 * try { } catch (Exception e) { // TODO: handle exception }
+	 *
 	 */
 	@ExceptionHandler({ PessoaInexistenteOuInativaException.class })
 	public ResponseEntity<Object> handlePessoaInesistenteOuInativaException(PessoaInexistenteOuInativaException ex) {
