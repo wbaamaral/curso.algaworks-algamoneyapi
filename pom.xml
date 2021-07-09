@@ -99,6 +99,12 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
+		<!-- camada de segurança -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
         <!-- Dependencia para classes metamodel utilizada nas consultas jpa -->
         <!--
         <dependency>
