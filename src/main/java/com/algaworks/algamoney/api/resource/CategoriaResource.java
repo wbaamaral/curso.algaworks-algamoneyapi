@@ -40,7 +40,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@CrossOrigin (maxAge = 10, origins = { "http://localhost:9800"})
+	@CrossOrigin (maxAge = 10, origins = { "http://localhost:9800", "http://192.168.5.235:9800"})
 	@GetMapping
 	public List<Categoria> listar() {
 
