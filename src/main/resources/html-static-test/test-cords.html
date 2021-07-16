@@ -1,0 +1,36 @@
+<html>
+<body>
+
+	<button onclick="buscar()">Buscar categorias</button>
+
+	<script>
+		function printResponse() {
+			console.log(this.responseText);
+		}
+
+		function buscar() {
+			var req = new XMLHttpRequest();
+			req.addEventListener("load", printResponse);
+			req.open("GET", "http://localhost:8080/categorias");
+			req.setRequestHeader('HEADER1', 'VALOR');
+
+			req.send();
+		}
+	</script>
+
+	<!-- 
+	Aula -> 6.9. O que é CORS?
+	
+	Quando tentei executar recebi o erro:
+	$ python -m SimpleHTTPServer
+    python: No module named SimpleHTTPServer
+	
+	Correção:
+        Note that on some machines python redirects to python 2 and on some others to python 3, 
+        so if you want a command that always works use:
+            - python3 -m http.server <port>
+            - python2 -m SimpleHTTPServer <port> 
+ 
+    -->
+</body>
+</html>
