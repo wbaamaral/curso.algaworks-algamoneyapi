@@ -45,11 +45,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private  UserDetailsService userDetailsService;
 	
-	@Autowired
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(PasswordEncoder());
-
-	}
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
