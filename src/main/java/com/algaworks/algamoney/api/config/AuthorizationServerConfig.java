@@ -1,3 +1,4 @@
+
 package com.algaworks.algamoney.api.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
