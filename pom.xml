@@ -119,13 +119,11 @@
 		</dependency>
 
 		<!-- Dependencia para classes metamodel utilizada nas consultas jpa -->
-		<!--
 		 <dependency> 
 		 	<groupId>org.hibernate</groupId> 
 		 	<artifactId>hibernate-jpamodelgen</artifactId>
 		 </dependency> 
 		 
-		 -->
 	</dependencies>
 
 	<build>
