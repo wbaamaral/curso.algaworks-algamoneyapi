@@ -1,5 +1,6 @@
 package com.algaworks.algamoney.api.repository.projection;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.algaworks.algamoney.api.model.TipoLancamento;
@@ -21,6 +22,8 @@ public class ResumoLancamento {
 	private LocalDate dataVencimento;
 
 	private LocalDate dataPagamento;
+	
+	private BigDecimal valor;
 
 	private TipoLancamento tipo;
 
@@ -28,5 +31,4 @@ public class ResumoLancamento {
 
 	private String pessoa;
 
-	
 }
