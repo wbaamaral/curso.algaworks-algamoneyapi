@@ -88,7 +88,7 @@ public class LancamentoResource {
 	 * Opção de tratamento de erros sem try catch Tratando direto no controlador o
 	 * código fica mais limpo :) ---com exceção do comentario do aprendiz aqui.
 	 *
-	 * try { } catch (Exception e) { // TODO: handle exception }
+	 * try { } catch (Exception e) { // handle exception }
 	 *
 	 */
 	@ExceptionHandler({ PessoaInexistenteOuInativaException.class })
