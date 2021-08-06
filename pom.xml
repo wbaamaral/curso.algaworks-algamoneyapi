@@ -131,6 +131,7 @@
 		 	</artifactId>
 		 	<optional>true</optional>
 		 </dependency>
+
 	</dependencies>
 
 	<build>
@@ -138,15 +139,8 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -154,7 +148,19 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-				
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+					<failOnError>false</failOnError>
+					<generatedSourcesDirectory>src/main/java</generatedSourcesDirectory>
+				</configuration>
+
+
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
