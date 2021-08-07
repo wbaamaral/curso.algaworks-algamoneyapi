@@ -147,8 +147,12 @@
 				<configuration>
 					<source>11</source>
 					<target>11</target>
+					<encoding>UTF-8</encoding>
 					<failOnError>false</failOnError>
 					<generatedSourcesDirectory>src/main/java</generatedSourcesDirectory> 
+					<compilerArguments>
+						<compilerArguments>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+					</compilerArguments>
 				</configuration>
 
 
