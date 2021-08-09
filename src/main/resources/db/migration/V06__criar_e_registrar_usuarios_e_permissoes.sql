@@ -1,4 +1,4 @@
-use algamoneyapi;
+--  use algamoneyapi;
 
 DROP TABLE IF EXISTS `usuario`;
 DROP TABLE IF EXISTS `permissoes`;

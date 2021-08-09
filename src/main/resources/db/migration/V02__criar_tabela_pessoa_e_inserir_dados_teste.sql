@@ -1,4 +1,4 @@
-use algamoneyapi;
+-- use algamoneyapi;
 
 CREATE TABLE pessoa (
 	codigo BIGINT auto_increment NOT NULL,

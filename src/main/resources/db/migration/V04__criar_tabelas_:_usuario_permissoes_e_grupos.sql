@@ -1,5 +1,5 @@
 
-use algamoneyapi;
+-- use algamoneyapi;
 
 -- CREATE TABLE permissao(
 -- 	codigo BIGINT AUTO_INCREMENT PRIMARY KEY,

@@ -4,7 +4,7 @@ CREATE TABLE `categoria` (
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO algamoneyapi.categoria (nome) VALUES
+INSERT INTO categoria (nome) VALUES
 	 ('Lazer'),
 	 ('Alimentação'),
 	 ('Supermercado'),

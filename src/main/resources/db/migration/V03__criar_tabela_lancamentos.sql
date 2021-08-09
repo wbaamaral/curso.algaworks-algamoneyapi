@@ -10,11 +10,11 @@ CREATE TABLE `lancamento` (
   `codigo_pessoa` bigint(20) not null,
   CONSTRAINT lancamento_FK 
   FOREIGN KEY (codigo_categoria) 
-  	REFERENCES algamoneyapi.categoria(codigo), 
+  	REFERENCES categoria(codigo), 
     -- ON DELETE CASCADE ON UPDATE CASCADE ,
   CONSTRAINT pessoa_FK
   FOREIGN KEY (codigo_pessoa)
-  REFERENCES algamoneyapi.pessoa(codigo)
+  REFERENCES pessoa(codigo)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
