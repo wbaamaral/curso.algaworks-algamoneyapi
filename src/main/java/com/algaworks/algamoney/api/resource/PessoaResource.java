@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algamoney.api.event.RecursoCriadoEvent;
 import com.algaworks.algamoney.api.model.Pessoa;
 import com.algaworks.algamoney.api.repository.PessoaRepository;
+import com.algaworks.algamoney.api.repository.filter.PessoaFilter;
+import com.algaworks.algamoney.api.repository.pessoa.PessoaRepositoryImpl;
 import com.algaworks.algamoney.api.service.PessoaService;
 
 @RestController
@@ -38,22 +40,30 @@ public class PessoaResource {
 	private PessoaRepository pessoaRepository;
 
 	@Autowired
+	private PessoaRepositoryImpl pessoaRepositoryImpl;
+	
+	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@Autowired
 	PessoaService pessoaService;
 
-//	@GetMapping
-//	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
-//	public Page<Pessoa> pesquisar(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable){
-//		return pessoaRepository.findByNameContaining(nome, pageable);
-//	}
-	
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
 	public Page<Pessoa> pesquisar(@RequestParam(required = false, defaultValue = "") String nome, Pageable pageable) {
 		return pessoaRepository.findByNomeContaining(nome, pageable);
 	}
+
+	@GetMapping(params = "nome")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+
+	public Page<Pessoa> filtrarNome(@RequestParam(required = false, defaultValue = "") String nome, Pageable pageable) {
+		PessoaFilter pessoaFilter = new PessoaFilter();
+		pessoaFilter.setNome(nome);
+		
+		return pessoaRepositoryImpl.filtrarNome( pessoaFilter, pageable);
+	}
+	
 	
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
