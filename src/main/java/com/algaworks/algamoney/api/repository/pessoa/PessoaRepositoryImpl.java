@@ -16,9 +16,14 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
+import com.algaworks.algamoney.api.model.Categoria_;
+import com.algaworks.algamoney.api.model.Lancamento;
+import com.algaworks.algamoney.api.model.Lancamento_;
 import com.algaworks.algamoney.api.model.Pessoa;
 import com.algaworks.algamoney.api.model.Pessoa_;
 import com.algaworks.algamoney.api.repository.filter.PessoaFilter;
+import com.algaworks.algamoney.api.repository.projection.ResumoLancamento;
+import com.algaworks.algamoney.api.repository.projection.ResumoPessoas;
 
 public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 
@@ -76,4 +81,20 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 
 		return manager.createQuery(criteria).getSingleResult();
 	}
+
+	@Override
+	public List<ResumoPessoas> getCombobox() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<ResumoPessoas> criteria = builder.createQuery(ResumoPessoas.class);
+		Root<Pessoa> root = criteria.from(Pessoa.class);
+
+		criteria.select(builder.construct(ResumoPessoas.class
+				, root.get(Pessoa_.codigo), root.get(Pessoa_.nome)));
+
+		TypedQuery<ResumoPessoas> query = manager.createQuery(criteria);
+	
+
+		return query.getResultList();
+	}
+
 }

@@ -30,6 +30,7 @@ import com.algaworks.algamoney.api.model.Pessoa;
 import com.algaworks.algamoney.api.repository.PessoaRepository;
 import com.algaworks.algamoney.api.repository.filter.PessoaFilter;
 import com.algaworks.algamoney.api.repository.pessoa.PessoaRepositoryImpl;
+import com.algaworks.algamoney.api.repository.projection.ResumoPessoas;
 import com.algaworks.algamoney.api.service.PessoaService;
 
 @RestController
@@ -41,30 +42,34 @@ public class PessoaResource {
 
 	@Autowired
 	private PessoaRepositoryImpl pessoaRepositoryImpl;
-	
+
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@Autowired
 	PessoaService pessoaService;
 
+	@GetMapping(params = "combo")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+	public List<ResumoPessoas> buscarTodos() {
+		return pessoaRepositoryImpl.getCombobox();
+	}
+
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
-	public Page<Pessoa> pesquisar(@RequestParam(required = false, defaultValue = "") String nome, Pageable pageable) {
-		return pessoaRepository.findByNomeContaining(nome, pageable);
-	}
-
-	@GetMapping(params = "nome")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
-
-	public Page<Pessoa> filtrarNome(@RequestParam(required = false, defaultValue = "") String nome, Pageable pageable) {
+	public Page<Pessoa> filtrarNome(@RequestParam(required = false, defaultValue = "") String nome,
+			Pageable pageable) {
 		PessoaFilter pessoaFilter = new PessoaFilter();
-		pessoaFilter.setNome(nome);
+
+		if (nome.isBlank() || nome.isEmpty() || nome.length() == 0) {
+			nome = " ";
+		}
 		
-		return pessoaRepositoryImpl.filtrarNome( pessoaFilter, pageable);
+		pessoaFilter.setNome(nome);
+
+		return pessoaRepositoryImpl.filtrarNome(pessoaFilter, pageable);
 	}
-	
-	
+
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
 	public ResponseEntity<Pessoa> criar(@Validated @RequestBody Pessoa pessoa, HttpServletResponse response) {
