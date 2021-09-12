@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.AssertFalse;
 
+import org.hibernate.validator.cfg.defs.AssertFalseDef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -51,20 +53,20 @@ public class PessoaResource {
 
 	@GetMapping(params = "combo")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
-	public List<ResumoPessoas> buscarTodos() {
-		return pessoaRepositoryImpl.getCombobox();
+	public List<ResumoPessoas> buscarTodos(@RequestParam(required = false, defaultValue = "false") boolean listarTodos) {
+	
+		return pessoaRepositoryImpl.getCombobox(listarTodos);
 	}
 
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
-	public Page<Pessoa> filtrarNome(@RequestParam(required = false, defaultValue = "") String nome,
-			Pageable pageable) {
+	public Page<Pessoa> filtrarNome(@RequestParam(required = false, defaultValue = "") String nome, Pageable pageable) {
 		PessoaFilter pessoaFilter = new PessoaFilter();
 
 		if (nome.isBlank() || nome.isEmpty() || nome.length() == 0) {
 			nome = " ";
 		}
-		
+
 		pessoaFilter.setNome(nome);
 
 		return pessoaRepositoryImpl.filtrarNome(pessoaFilter, pageable);

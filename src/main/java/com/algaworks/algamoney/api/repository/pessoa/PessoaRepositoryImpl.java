@@ -16,13 +16,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
-import com.algaworks.algamoney.api.model.Categoria_;
-import com.algaworks.algamoney.api.model.Lancamento;
-import com.algaworks.algamoney.api.model.Lancamento_;
 import com.algaworks.algamoney.api.model.Pessoa;
 import com.algaworks.algamoney.api.model.Pessoa_;
 import com.algaworks.algamoney.api.repository.filter.PessoaFilter;
-import com.algaworks.algamoney.api.repository.projection.ResumoLancamento;
 import com.algaworks.algamoney.api.repository.projection.ResumoPessoas;
 
 public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
@@ -83,7 +79,7 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 	}
 
 	@Override
-	public List<ResumoPessoas> getCombobox() {
+	public List<ResumoPessoas> getCombobox(boolean acaoEditar) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ResumoPessoas> criteria = builder.createQuery(ResumoPessoas.class);
 		Root<Pessoa> root = criteria.from(Pessoa.class);
@@ -93,7 +89,8 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 				, root.get(Pessoa_.codigo), root.get(Pessoa_.nome),
 				root.get(Pessoa_.ativo)));
 
-		criteria.where(root.get(Pessoa_.ativo));
+		if (!acaoEditar)
+			criteria.where(root.get(Pessoa_.ativo));
 		
 		TypedQuery<ResumoPessoas> query = manager.createQuery(criteria);
 	

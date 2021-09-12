@@ -13,6 +13,6 @@ public interface PessoaRepositoryQuery {
 	
 	public Page<Pessoa> filtrarNome(PessoaFilter pessoaFilter, Pageable pageable);
 
-	public List<ResumoPessoas> getCombobox();
+	public List<ResumoPessoas> getCombobox(boolean acaoEditar);
 
 }
