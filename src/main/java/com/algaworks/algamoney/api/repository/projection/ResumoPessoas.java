@@ -1,10 +1,5 @@
 package com.algaworks.algamoney.api.repository.projection;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import com.algaworks.algamoney.api.model.TipoLancamento;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,4 +13,6 @@ public class ResumoPessoas {
 	private Long codigo;
 	
 	private String nome;
+	
+	private boolean ativo;
 }

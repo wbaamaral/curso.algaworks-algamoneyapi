@@ -87,10 +87,14 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ResumoPessoas> criteria = builder.createQuery(ResumoPessoas.class);
 		Root<Pessoa> root = criteria.from(Pessoa.class);
+		
 
 		criteria.select(builder.construct(ResumoPessoas.class
-				, root.get(Pessoa_.codigo), root.get(Pessoa_.nome)));
+				, root.get(Pessoa_.codigo), root.get(Pessoa_.nome),
+				root.get(Pessoa_.ativo)));
 
+		criteria.where(root.get(Pessoa_.ativo));
+		
 		TypedQuery<ResumoPessoas> query = manager.createQuery(criteria);
 	
 
