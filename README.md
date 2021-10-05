@@ -8,3 +8,6 @@ Frontend [repositório](https://github.com/wbaamaral/algamoney-ui)
 
 
 
+# Atualização
+
+Projeto em atualização para spring boot 2.5

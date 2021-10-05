@@ -10,32 +10,28 @@ import com.algaworks.algamoney.api.repository.PessoaRepository;
 
 @Service
 public class PessoaService {
-
+ 	
 	@Autowired
-	PessoaRepository pessoaRepository;
+	private PessoaRepository pessoaRepository;
 
 	public Pessoa atualizar(Long codigo, Pessoa pessoa) {
-		Pessoa pessoaSalva = buscarPessoaPorCodigo(codigo);
-
+		Pessoa pessoaSalva = buscarPessoaPeloCodigo(codigo);
+		
 		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
+		return pessoaRepository.save(pessoaSalva);
+	}   
 
-		pessoaRepository.save(pessoaSalva);
-
-		return pessoaSalva;
-	}
-
+	
 	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
-
-		Pessoa pessoaSalva = buscarPessoaPorCodigo(codigo);
-
+		Pessoa pessoaSalva = buscarPessoaPeloCodigo(codigo);
 		pessoaSalva.setAtivo(ativo);
-
 		pessoaRepository.save(pessoaSalva);
 	}
 
-	public Pessoa buscarPessoaPorCodigo(Long codigo) {
-		Pessoa pessoaSalva = this.pessoaRepository.findById(codigo)
-				.orElseThrow(() -> new EmptyResultDataAccessException(1));
+	public Pessoa buscarPessoaPeloCodigo(Long codigo) {
+		Pessoa pessoaSalva =  pessoaRepository.findById(codigo)
+								.orElseThrow(() -> new EmptyResultDataAccessException(1));
+
 		return pessoaSalva;
 	}
 }

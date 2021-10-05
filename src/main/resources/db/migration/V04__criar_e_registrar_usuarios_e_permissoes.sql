@@ -1,16 +1,9 @@
---  use algamoneyapi;
-
-DROP TABLE IF EXISTS `usuario`;
-DROP TABLE IF EXISTS `permissoes`;
-DROP TABLE IF EXISTS `permissao`;
-DROP TABLE IF exists `usuario_permissao`;
-
 CREATE TABLE usuario (
 	codigo BIGINT(20) PRIMARY KEY,
 	nome VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	senha VARCHAR(150) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE permissao (
 	codigo BIGINT(20) PRIMARY KEY,
@@ -25,16 +18,12 @@ CREATE TABLE usuario_permissao (
 	FOREIGN KEY (codigo_permissao) REFERENCES permissao(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
--- Insert usuarios
 INSERT INTO usuario (codigo, nome, email, senha) values (1, 'Administrador', 'admin@algamoney.com', '$2a$10$X607ZPhQ4EgGNaYKt3n4SONjIv9zc.VMWdEuhCuba7oLAL5IvcL5.');
 INSERT INTO usuario (codigo, nome, email, senha) values (2, 'Maria Silva', 'maria@algamoney.com', '$2a$10$Zc3w6HyuPOPXamaMhh.PQOXvDnEsadztbfi6/RyZWJDzimE8WQjaq');
 
--- Insert Permissoes
 INSERT INTO permissao (codigo, descricao) values (1, 'ROLE_CADASTRAR_CATEGORIA');
 INSERT INTO permissao (codigo, descricao) values (2, 'ROLE_PESQUISAR_CATEGORIA');
 
--- Relacao Usuarios Permissoes
 INSERT INTO permissao (codigo, descricao) values (3, 'ROLE_CADASTRAR_PESSOA');
 INSERT INTO permissao (codigo, descricao) values (4, 'ROLE_REMOVER_PESSOA');
 INSERT INTO permissao (codigo, descricao) values (5, 'ROLE_PESQUISAR_PESSOA');

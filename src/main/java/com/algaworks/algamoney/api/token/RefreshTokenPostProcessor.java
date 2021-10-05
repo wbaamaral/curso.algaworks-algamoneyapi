@@ -20,13 +20,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.algaworks.algamoney.api.config.property.AlgamoneyApiProperty;
 
 @SuppressWarnings("deprecation")
-
 @ControllerAdvice
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
 
 	@Autowired
 	private AlgamoneyApiProperty algamoneyApiProperty;
-	
+
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
 		return returnType.getMethod().getName().equals("postAccessToken");
@@ -36,21 +35,20 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 	public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken body, MethodParameter returnType,
 			MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
 			ServerHttpRequest request, ServerHttpResponse response) {
-
+		
 		HttpServletRequest req = ((ServletServerHttpRequest) request).getServletRequest();
 		HttpServletResponse resp = ((ServletServerHttpResponse) response).getServletResponse();
-
+		
 		DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) body;
-
+		
 		String refreshToken = body.getRefreshToken().getValue();
-
 		adicionarRefreshTokenNoCookie(refreshToken, req, resp);
-		removerRefreshTokendoBody(token);
-
+		removerRefreshTokenDoBody(token);
+		
 		return body;
 	}
 
-	private void removerRefreshTokendoBody(DefaultOAuth2AccessToken token) {
+	private void removerRefreshTokenDoBody(DefaultOAuth2AccessToken token) {
 		token.setRefreshToken(null);
 	}
 
@@ -59,10 +57,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 		refreshTokenCookie.setHttpOnly(true);
 		refreshTokenCookie.setSecure(algamoneyApiProperty.getSeguranca().isEnableHttps());
 		refreshTokenCookie.setPath(req.getContextPath() + "/oauth/token");
-		refreshTokenCookie.setMaxAge(2592000); // 30 dias
-
+		refreshTokenCookie.setMaxAge(2592000);
 		resp.addCookie(refreshTokenCookie);
-
 	}
-
 }

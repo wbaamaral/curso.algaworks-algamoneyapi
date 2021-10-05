@@ -1,10 +1,13 @@
 package com.algaworks.algamoney.api.config.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 @ConfigurationProperties("algamoney")
+@Component
 public class AlgamoneyApiProperty {
-	private String originPermitida = "http://localhost:9800";
+
+	private String originPermitida = "http://localhost:8000";
 
 	private final Seguranca seguranca = new Seguranca();
 
